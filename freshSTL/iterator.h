@@ -4,8 +4,8 @@
 
 #ifndef STL_ITERATOR_H
 #define STL_ITERATOR_H
-
-namespace liangsc_toys{
+#include <stddef.h>
+namespace sctoys{
     struct input_iterator_tag{ };
     struct output_iterator_tag{ };
     struct forward_iterator_tag : public input_iterator_tag{ };
@@ -56,5 +56,38 @@ namespace liangsc_toys{
         typedef typename Iterator::pointer pointer;
         typedef typename Iterator::reference reference;
     };
+    template <typename T>
+    struct iterator<T*> {
+        typedef random_access_iterator_tag iterator_category;
+        typedef T value_type;
+        typedef ptrdiff_t difference_tyep;
+        typedef T* pointer_type;
+        typedef T& reference;
+    };
+
+    template <typename Iterator>
+    struct iterator_traits{
+        typedef typename Iterator::iterator_category iterator_category;
+        typedef typename Iterator::value_type value_type;
+        typedef typename Iterator::difference_type difference_type;
+        typedef typename Iterator::pointer pointer;
+        typedef typename Iterator::reference reference;
+    };
+
+    template <typename Iterator, typename Distance>
+    void __advance(Iterator &it, Distance n, const input_iterator_tag &itertag){
+        while(n--) {
+            it++;
+        }
+    }
+
+    template <typename Iterator, typename Distance>
+    void __advance(Iterator &it, Distance n, const random_access_iterator_tag &itertag){
+        it += n;
+    } 
+    template <typename Iterator, typename Distance>
+    void advance(Iterator &it, Distance n) {
+
+    }
 }
 #endif //MY_PRINTF_ITERATOR_H
