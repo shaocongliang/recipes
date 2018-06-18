@@ -1,20 +1,36 @@
-//
-// Created by mark on 16-12-16.
-//
 class Solution {
 public:
-    void rotate(vector<vector<int>>& matrix) {
-        vector<vector<int>> res;
-        int len = matrix.size();
-        res.resize(len);
-        for(int i = 0; i < len; ++i){
-            res[i].resize(len);
+    void replace(std::vector<vector<int>> &matrix, std::vector<std::vector<bool>> &state, int i, int j, int val) {
+        if(state[i][j] == false) {
+            int ii = j;
+            int jj = matrix.size() - i -1;
+            replace(matrix, state, ii, jj, matrix[i][j]);
+            matrix[i][j] = val;
+            state[i][j] = true;
         }
-        for(int i = 0; i < len; ++i){
-            for(int j = 0; j < len; ++j){
-                res[j][len-1-i] = matrix[i][j];
+        else {
+            matrix[i][j] = val;
+        }
+    }
+    void rotate(vector<vector<int>>& matrix) {
+        int N = matrix.size();
+        std::vector<std::vector<bool>> state;
+        state.resize(N);
+        for(int i = 0; i < N; ++i) {
+            for(int j = 0; j < N; ++j) {
+                state[i].push_back(false);
             }
         }
-        matrix = res;
+        for(int i = 0; i < N; ++i) {
+            for(int j = 0; j < N; ++j) {
+                if(state[i][j] == false) {
+                    state[i][j] = true;
+                    int ii = j;
+                    int jj = N - i -1;
+                    int val = matrix[i][j];
+                    replace(matrix, state, ii, jj, val);
+                }
+            }
+        }
     }
 };
