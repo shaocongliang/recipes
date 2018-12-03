@@ -1,0 +1,21 @@
+.PS 7.5
+ellipse "hello.cpp"
+arrow 
+E1: box "Preprocessor" "cpp"
+arrow
+box "Compiler" "cc1plus"
+arrow
+box "Assembler" "as"
+arrow
+ellipse "object files" "hello.o"
+arrow 
+E2: box "linker" "ld"
+arrow
+circle "elf"
+E3: ellipse "header" "files" at E1 + (0.0, 0.8)
+E4: ellipse "library" "files" at E2 + (0.0, 0.8)
+E5: ellipse "others.o" at E2 -( 0.0, 0.8)
+arrow from E3.s to E1.n
+arrow from E4.s to E2.n
+arrow from E5.n to E2.s
+.PE

@@ -1,0 +1,41 @@
+.PS
+up;
+B1: ellipse height 0.4  "init" "main.cpp";
+move 0.5;
+E1: ellipse width 1.0 "workerthread"
+B2: box width 0.8 dashed height 1 at B1 - 2.0,0.0
+B3: box width 0.6 height 0.2 "Chat" at B2 + (0, 0.2)
+B4: box width 0.6 height 0.2 "openQA" at B2 - (0, 0.2)
+
+B5: box "Dispathcher" dotted height 0.4 at E1 - 2.0,0.0
+
+B6: box dashed width 1.0 height 0.8 at E1 - (1.0, -1.0)
+B7: box width 0.8 height 0.2 "TOQueue" at B6 + (0, 0.2)
+B8: box width 0.8 height 0.2 "PJQueue" at B6 - (0, 0.2)
+
+E2: ellipse "ReadFunctor" width 1.0 at B6 -(1.5, 0.0)
+
+B9: box "Client" height 0.4 at E2 - (2.0, 0.0)
+
+line dotted -> "Register Service" "" from B1.w to B2.e
+line -> from E1.w to B5.e
+line -> "request" "" from B9.e to E2.w
+line -> from B5.s to B2.n
+arrow -> "request" "" from E2.e to B6.w
+arrow dotted -> from B1.n to E1.s
+arc -> cw from B8.e to E1.n rad 3
+arc -> from B7.n to B9.n rad 7
+
+B10: box dashed height 0.8 at B2 - (1.2, -0.5)
+B11: box width 0.5 height 0.2 "search" at B10 + (0, 0.2)
+B12: box width 0.5 height 0.2 "answer" at B10 - (0, 0.2)
+
+B13: box "repo" height 0.3 at B2 - (1.2, 0.4)
+arc -> from B4.w to B13.e rad 3
+arc -> from B3.w to B10.e rad 2.5
+E3:  ellipse width 0.3 height 0.15 "es" at B9 - (-0.5, 0.8)
+arc -> from B11.w to E3.e rad 2
+arc -> cw from E3.n to B9.s rad 2
+arc -> cw from B12.w to B9.s rad 2
+arc -> cw from B13.w to B9.s rad 4
+.PE
